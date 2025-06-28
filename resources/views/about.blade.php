@@ -1,5 +1,5 @@
-<x-layout title="About">
+<x-layout :title=$title>
    
-  <p>Welcome to my About page.</p>
+  <p>Welcome to my {{ $title }} </p>
 
 </x-layout>
