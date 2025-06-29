@@ -11,7 +11,8 @@ Route::get('/', function () {
 });
 
 Route::get('/posts', function () {
-    $posts = Post::all();
+    $posts = Post::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
+
     $title = 'Blog Page';
     return view('posts', compact('posts', 'title'));
 });
@@ -19,18 +20,6 @@ Route::get('/posts', function () {
 Route::get('/posts/{post:slug}', function (Post $post) {
     $title = 'Single Post';
     return view('post', compact('post', 'title'));
-});
-
-Route::get('/authors/{user:username}', function (User $user) {
-    $posts = $user->posts; 
-    $title = count($posts).' Article By '.$user->name;
-    return view('posts', compact('posts', 'title'));    
-});
-
-Route::get('/categories/{category:slug}', function (Category $category) {
-    $posts = $category->posts; 
-    $title = 'Category : '.$category->name;
-    return view('posts', compact('posts', 'title'));    
 });
 
 Route::get('/about', function () {

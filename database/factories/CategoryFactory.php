@@ -21,6 +21,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $category,
             'slug' => Str::slug($category),
+            // 'color' => fake()->
         ];
     }
 }
